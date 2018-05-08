@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+	<title>Getting Started: Handling Form Submission</title>
+	<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+
+	<link rel = "stylesheet" href = "/bootstrap-4.0.0/css/bootstrap.css" />
+
+</head>
+<body>
+<h1>Result</h1>
+
+<div class="bg-info clearfix">
+	<button type="button" class="btn btn-secondary float-left">Example Button floated left</button>
+	<button type="button" class="btn btn-secondary float-right">Example Button floated right</button>
+</div>
+<div class = " d-flex justify-content-center">
+
+	<form action = "#" th:action = "@{/thy}" th:object = "${formCommand}" class = "form-group" method = "post">
+		<div class = "form-group">
+			<p>Simple Text Field:</p><input class = "form-control" type = "text" th:field = "*{textField}" />
+		</div>
+
+		<div class = "form-group">
+			<p>Text Area Field: <textarea class="float-right " th:field = "*{textareaField}"></textarea></p>
+		</div>
+
+		<div class = "form-group">
+			<p>Date Field: <input class="float-right " type = "datetime-local" th:field = "*{datetimeField}" /></p>
+		</div>
+
+		<div class = "form-group">
+			<p>Color Field : <input class="float-right " type = "color" th:field = " *{colorField}"></p>
+		</div>
+
+
+		<div class = "form-group">
+			<label th:for = "singleCheckboxField" th:text = "'Single Checkbox Field:'"></label>
+			<input type = "checkbox" th:field = "*{singleCheckboxField}" />
+		</div>
+
+		<!--multi selected combobox !-->
+		<div class = "form-group">
+			<ul class = " list-inline">
+				<li class="list-inline-item" th:each = "checkboxValue: ${multiCheckboxAllValues}">
+					<input  type = "checkbox"
+					       th:field = "*{multiCheckboxSelectedValues}"
+					       th:value = "${checkboxValue}" />
+					<label
+							th:for = "${#ids.prev('multiCheckboxSelectedValues')}"
+							th:text = "${checkboxValue}"></label>
+				</li>
+			</ul>
+		</div>
+
+		<!--single selected combobox !-->
+		<div class = "form-group">
+			<ul class="list-inline">
+				<li class="list-inline-item " th:each = "radioValue: ${singleSelectAllValues}">
+					<input type = "radio"
+					       th:field = "*{radioButtonSelectedValue}"
+					       th:value = "${radioValue}" />
+					<label
+							th:for = "${#ids.prev('radioButtonSelectedValue')}"
+							th:text = "${radioValue}"></label>
+				</li>
+			</ul>
+		</div>
+
+		<div class = "form-group">
+			<select th:field = "*{dropdownSelectedValue}">
+				<option
+						th:each = "dropdownValue: ${singleSelectAllValues}"
+						th:value = "${dropdownValue}"
+						th:text = "${dropdownValue}"></option>
+			</select>
+		</div>
+
+			<div class = "form-group">
+				<button class = "btn btn-info" type = "submit" value = "Submit">gonder</button>
+
+				<button type = "reset" value = "reset" class="btn btn-warning"> Reset</button>
+			</div>
+	</form>
+</div>
+
+<div class="card float-center" style="width: 18rem;">
+	<img class="card-img-top" src="https://i.pinimg.com/originals/82/0e/5e/820e5eb1fa19c599f0f23872bd5c6463.jpg" alt="Card image cap">
+	<div class="card-body">
+		<h5 class="card-title">Card title</h5>
+		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		<a href="#" class="btn btn-success float-right">Go somewhere</a>
+	</div>
+</div>
+
+<script src = "/jquery/jquery-3.3.1.min.js"></script>
+<script src = "/bootstrap-4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
